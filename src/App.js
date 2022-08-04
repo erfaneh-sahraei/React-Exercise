@@ -8,7 +8,13 @@ const App= () =>{
   const [products, setProducts] = useState([])
 
   useEffect(()=>{
-    console.log("useEfect")
+    const sendRequest= async ()=>{
+    const response = await fetch('http://localhost:8000/products')
+    const responseData = await response.json()
+    setProducts(responseData)  
+  }
+
+  sendRequest()
   } , [])
 
 const addProduct =(title)=>{
