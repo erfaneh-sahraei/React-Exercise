@@ -17,10 +17,18 @@ const App= () =>{
   sendRequest()
   } , [])
 
-const addProduct =(title)=>{
-const id = Math.floor(Math.random()*10000)
-const newProduct = {id, ...title}
-setProducts([...products, newProduct])
+const addProduct =async (title)=>{
+  const response = await fetch('http://localhost:8000/products',{
+    method:'POST',
+    headers:{
+      'Content-type':'application/json'
+    },
+    body: JSON.stringify(title)
+    
+  })
+  const responseData = await response.json()
+
+setProducts([...products, responseData])
 }
 
       const deleteProduct = async (id) =>{
@@ -28,8 +36,7 @@ setProducts([...products, newProduct])
         method:'DELETE'
        })
 
-
-    setProducts(products.filter((item)=> item.id !== id))
+     setProducts(products.filter((item)=> item.id !== id))
       }
   
   
