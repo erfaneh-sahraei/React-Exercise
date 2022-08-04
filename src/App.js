@@ -23,7 +23,12 @@ const newProduct = {id, ...title}
 setProducts([...products, newProduct])
 }
 
-      const deleteProduct = (id) =>{
+      const deleteProduct = async (id) =>{
+       await fetch(`http://localhost:8000/products/${id}`,{
+        method:'DELETE'
+       })
+
+
     setProducts(products.filter((item)=> item.id !== id))
       }
   
